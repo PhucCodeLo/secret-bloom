@@ -1,0 +1,282 @@
+@import "tailwindcss";
+
+@theme {
+  --color-midnight: #080d1b;
+  --color-deepblue: #10172a;
+  --color-nightblue: #0b1226;
+  --color-rose: #f4a0bc;
+  --color-rosedeep: #c96a8e;
+  --color-rosegold: #dca47a;
+  --color-champagne: #f3d79b;
+  --color-ivory: #fff4e6;
+  --color-lavender: #b9a8e8;
+  --color-lavenderdeep: #8f7cc9;
+
+  --font-display: "Playfair Display", "Times New Roman", Georgia, serif;
+  --font-body: "Be Vietnam Pro", system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+
+html,
+body {
+  background-color: #080d1b;
+  color: #fff4e6;
+  font-family: var(--font-body);
+  -webkit-tap-highlight-color: transparent;
+  overscroll-behavior-y: none;
+}
+
+/* Safe-area padding for notched devices */
+.safe-area {
+  padding-top: env(safe-area-inset-top);
+  padding-bottom: env(safe-area-inset-bottom);
+  padding-left: env(safe-area-inset-left);
+  padding-right: env(safe-area-inset-right);
+}
+
+/* ---------- Keyframes ---------- */
+
+@keyframes petal-fall {
+  0% {
+    transform: translate3d(0, -8vh, 0) rotate(0deg);
+    opacity: 0;
+  }
+  8% {
+    opacity: 0.85;
+  }
+  50% {
+    transform: translate3d(4vw, 52vh, 0) rotate(200deg);
+  }
+  100% {
+    transform: translate3d(-3vw, 108vh, 0) rotate(380deg);
+    opacity: 0;
+  }
+}
+
+@keyframes float-y {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-12px);
+  }
+}
+
+@keyframes glow-pulse {
+  0%,
+  100% {
+    opacity: 0.55;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.12);
+  }
+}
+
+@keyframes fog-drift {
+  0% {
+    transform: translateX(-6%);
+  }
+  100% {
+    transform: translateX(6%);
+  }
+}
+
+@keyframes twinkle {
+  0%,
+  100% {
+    opacity: 0.25;
+  }
+  50% {
+    opacity: 0.9;
+  }
+}
+
+.petal {
+  position: absolute;
+  top: -6vh;
+  border-radius: 100% 6% 100% 6%;
+  background: radial-gradient(circle at 35% 35%, #f9c9da, #f4a0bc 60%, #c96a8e);
+  opacity: 0;
+  animation-name: petal-fall;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  will-change: transform, opacity;
+}
+
+.animate-float-y {
+  animation: float-y 3.2s ease-in-out infinite;
+}
+
+.animate-glow-pulse {
+  animation: glow-pulse 2.6s ease-in-out infinite;
+}
+
+.animate-fog {
+  animation: fog-drift 14s ease-in-out infinite alternate;
+}
+
+.animate-twinkle {
+  animation: twinkle 3s ease-in-out infinite;
+}
+
+/* Soft radial vignette used behind hero objects */
+.stage-glow {
+  background: radial-gradient(
+    ellipse 62% 48% at 50% 46%,
+    rgba(243, 215, 155, 0.16),
+    rgba(220, 164, 122, 0.07) 55%,
+    transparent 75%
+  );
+}
+
+/* Premium button */
+.btn-gold {
+  background: linear-gradient(135deg, #f3d79b 0%, #dca47a 55%, #c98d5f 100%);
+  color: #241708;
+  box-shadow:
+    0 6px 24px rgba(220, 164, 122, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.5);
+  transition:
+    transform 0.18s ease,
+    box-shadow 0.18s ease,
+    filter 0.18s ease;
+}
+
+.btn-gold:hover {
+  filter: brightness(1.06);
+  box-shadow:
+    0 8px 30px rgba(220, 164, 122, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.55);
+}
+
+.btn-gold:active {
+  transform: scale(0.97);
+}
+
+.btn-gold:disabled {
+  opacity: 0.45;
+  filter: grayscale(0.3);
+}
+
+.btn-ghost {
+  border: 1px solid rgba(243, 215, 155, 0.45);
+  color: #f3d79b;
+  transition:
+    background 0.18s ease,
+    transform 0.18s ease;
+}
+
+.btn-ghost:hover {
+  background: rgba(243, 215, 155, 0.1);
+}
+
+.btn-ghost:active {
+  transform: scale(0.97);
+}
+
+/* Visible focus for keyboard users */
+:focus-visible {
+  outline: 2px solid #f3d79b;
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+/* Letter paper texture */
+.letter-paper {
+  background:
+    radial-gradient(ellipse at 20% 0%, rgba(220, 164, 122, 0.12), transparent 60%),
+    radial-gradient(ellipse at 85% 100%, rgba(244, 160, 188, 0.1), transparent 55%),
+    linear-gradient(180deg, #fffaf1 0%, #fff4e6 100%);
+  box-shadow:
+    0 24px 80px rgba(0, 0, 0, 0.55),
+    0 4px 18px rgba(220, 164, 122, 0.25);
+}
+
+.gold-frame {
+  border: 1px solid rgba(220, 164, 122, 0.65);
+  box-shadow:
+    inset 0 0 0 4px rgba(255, 244, 230, 0.9),
+    inset 0 0 0 5px rgba(220, 164, 122, 0.55);
+}
+
+/* Reduced motion: kill decorative animation globally */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Deep Personalization — Living World theme overrides.
+   Tailwind v4 color utilities resolve to var(--color-*), so overriding the
+   tokens under [data-theme] re-skins backgrounds, lighting and accents
+   across the whole journey without touching components. */
+[data-theme='dawn'] {
+  --color-champagne: #ffc46b;
+  --color-rosegold: #ee9a52;
+  --color-midnight: #1a0e14;
+  --color-deepblue: #38202b;
+  --color-nightblue: #221016;
+}
+[data-theme='moonlit'] {
+  --color-champagne: #cfe0ff;
+  --color-rosegold: #a9c2e8;
+  --color-midnight: #0a1220;
+  --color-deepblue: #14203a;
+  --color-nightblue: #0e1626;
+}
+[data-theme='meadow'] {
+  --color-champagne: #b8e8c9;
+  --color-rosegold: #8fd0a0;
+  --color-midnight: #0c2018;
+  --color-deepblue: #143726;
+  --color-nightblue: #0d241b;
+}
+
+/* LetterCard drop cap — first-letter flourish for the opening paragraph. */
+.letter-dropcap::first-letter {
+  font-size: 2.7em;
+  float: left;
+  line-height: 0.85;
+  padding-right: 0.14em;
+  padding-top: 0.05em;
+  color: #8a5a2e;
+  font-weight: 700;
+}
+
+/* Handwritten signature — draws itself like pen on paper. */
+.handwritten-draw,
+.handwritten-final {
+  font-family: 'Dancing Script', 'Segoe Script', 'Brush Script MT', cursive;
+}
+.handwritten-draw {
+  fill: transparent;
+  stroke: var(--sig-color, #8a5a2e);
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: var(--sig-len, 1400);
+  stroke-dashoffset: var(--sig-len, 1400);
+  animation: sig-draw 2.8s ease-in-out var(--sig-delay, 700ms) forwards;
+}
+.handwritten-final {
+  fill: var(--sig-color, #8a5a2e);
+  stroke: none;
+}
+@keyframes sig-draw {
+  0% { stroke-dashoffset: var(--sig-len, 1400); fill: transparent; }
+  70% { stroke-dashoffset: 0; fill: transparent; }
+  100% { stroke-dashoffset: 0; fill: var(--sig-color, #8a5a2e); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .handwritten-draw {
+    animation: none;
+    stroke-dashoffset: 0;
+    fill: var(--sig-color, #8a5a2e);
+  }
+}
